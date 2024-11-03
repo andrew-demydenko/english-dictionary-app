@@ -11,7 +11,7 @@
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/dictionary">Dictionary</RouterLink>
       </nav>
     </div>
   </header>
@@ -28,7 +28,6 @@ const { loadWordsSets, loadWords } = useWordsStore()
 onMounted(() => {
   loadWordsSets()
   loadWords()
-  console.log('Header mounted')
 })
 </script>
 
