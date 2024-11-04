@@ -19,7 +19,6 @@ export const createWordsSet = async ({ name, wordIds, id }: TWordsSet) => {
     throw new Error(`Set with the name "${name}" already exists.`)
   }
 
-  console.log(name, wordIds, id)
   const newSet: TWordsSet = { name, wordIds: wordIds.slice(), id }
   await db.wordsSets.add(newSet)
 

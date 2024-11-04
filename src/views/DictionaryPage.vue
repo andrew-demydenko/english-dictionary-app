@@ -2,9 +2,17 @@
   <v-container>
     <v-row>
       <v-col>
-        <SetList />
-        <v-btn class="mr-3" @click="showDialog">Add a word</v-btn>
-        <v-btn>Create Word Set<WordSetModal :words="words" /></v-btn>
+        <div class="controls">
+          <div class="controls-creation">
+            <v-btn class="controls-creation-btn" @click="showDialog"
+              >Add a word</v-btn
+            >
+            <v-btn class="controls-creation-btn"
+              >Create Word Set<WordSetModal :words="words"
+            /></v-btn>
+          </div>
+          <SetList />
+        </div>
 
         <v-dialog persistent v-model="dialog" max-width="500px">
           <v-card>
@@ -39,18 +47,20 @@
             <span v-else>{{ item.word }}</span>
           </template>
           <template v-slot:item.actions="{ item }">
-            <v-btn class="mr-3" icon size="x-small" @click="editWord(item)">
-              <v-icon>mdi-pencil</v-icon>
-            </v-btn>
+            <div class="text-no-wrap">
+              <v-btn class="mr-3" icon size="x-small" @click="editWord(item)">
+                <v-icon>mdi-pencil</v-icon>
+              </v-btn>
 
-            <v-btn icon color="red" size="x-small">
-              <v-icon>mdi-delete</v-icon>
-              <Confirmation
-                @submit="item.id ? handleRemoveWord(item.id) : null"
-                title="Remove word"
-                text="Are you sure you want to remove this word?"
-              ></Confirmation>
-            </v-btn>
+              <v-btn icon color="red" size="x-small">
+                <v-icon>mdi-delete</v-icon>
+                <Confirmation
+                  @submit="item.id ? handleRemoveWord(item.id) : null"
+                  title="Remove word"
+                  text="Are you sure you want to remove this word?"
+                ></Confirmation>
+              </v-btn>
+            </div>
           </template>
         </v-data-table>
       </v-col>
@@ -157,4 +167,23 @@ const editWord = (word: TWord) => {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.controls-creation-btn {
+  margin-right: 1rem;
+}
+
+@media (max-width: 648px) {
+  .controls-creation-btn {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .controls {
+    display: block;
+  }
+}
+</style>
