@@ -74,7 +74,7 @@ const props = defineProps({
 
 onUpdated(() => {
   if (props.wordsSet) {
-    selectedWordIds.value = props.wordsSet.wordIds
+    selectedWordIds.value = [...props.wordsSet.wordIds]
     name.value = props.wordsSet.name
   }
 })

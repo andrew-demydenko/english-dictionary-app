@@ -72,6 +72,7 @@ export const useWordsStore = defineStore('words', () => {
     const index = wordsSets.value.findIndex(
       word => word.id === updatedWordsSet.id,
     )
+
     if (index !== -1) {
       wordsSets.value[index] = updatedWordsSet
     }

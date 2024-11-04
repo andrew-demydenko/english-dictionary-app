@@ -38,7 +38,6 @@ function closeDialog() {
 }
 
 function onSubmit() {
-  console.log('submit')
   emit('submit')
   closeDialog()
 }

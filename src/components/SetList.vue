@@ -9,7 +9,11 @@
     <template #default="{ isActive }">
       <v-list width="400px">
         <v-list-item v-for="set in wordsSets" :key="set.id">
-          <v-list-item-title>{{ set.name }}</v-list-item-title>
+          <v-list-item-title
+            ><RouterLink :to="`/words-sets/${set.id}`">{{
+              set.name
+            }}</RouterLink></v-list-item-title
+          >
           <v-list-item-subtitle
             >Words: {{ set.wordIds.length }}</v-list-item-subtitle
           >
@@ -28,7 +32,8 @@
               <v-btn color="red" size="small">
                 <v-icon>mdi-delete</v-icon>
                 <Confirmation
-                  @submit="set.id ? removeWordsSet(set.id, set.name) : null"
+                  v-if="set.id"
+                  @submit="removeWordsSet(set.id, set.name)"
                   title="Remove words set"
                   text="Are you sure you want to remove this words set?"
                 ></Confirmation>
@@ -42,6 +47,7 @@
 </template>
 
 <script setup lang="ts">
+import { RouterLink } from 'vue-router'
 import Confirmation from '@/components/ConfirmationModal.vue'
 import WordSetModal from '@/components/WordSetModal.vue'
 import { useWordsStore } from '@/stores/store'

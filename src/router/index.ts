@@ -14,6 +14,11 @@ const router = createRouter({
       name: 'dictionary',
       component: () => import('@/views/DictionaryPage.vue'),
     },
+    {
+      path: '/words-sets/:id',
+      name: 'words-set',
+      component: () => import('@/views/WordsSetPage.vue'),
+    },
   ],
 })
 

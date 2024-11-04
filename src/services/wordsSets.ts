@@ -51,7 +51,15 @@ export const modifyWordsSet = async ({
     throw new Error(`Set with the name "${name}" already exists.`)
   }
 
-  await db.wordsSets.put({ id, name, wordIds: wordIds.slice() })
+  const wordsToAddSet = await db.words.bulkGet(wordIds)
+
+  const validWords = wordsToAddSet.filter(word => word !== undefined)
+
+  await db.wordsSets.put({
+    id,
+    name,
+    wordIds: validWords.map(word => word.id as string),
+  })
 
   const allWords = await db.words.toArray()
 
@@ -63,8 +71,7 @@ export const modifyWordsSet = async ({
   })
   await db.words.bulkPut(wordsToRemoveSet)
 
-  const wordsToAddSet = await db.words.bulkGet(wordIds)
-  wordsToAddSet.forEach(word => {
+  validWords.forEach(word => {
     if (word && !word.sets?.includes(name)) {
       word.sets = word.sets || []
       word.sets.push(name)

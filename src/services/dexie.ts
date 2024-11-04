@@ -47,14 +47,5 @@ class DictionaryDB extends Dexie {
   }
 }
 
-export async function deleteDatabase() {
-  try {
-    await Dexie.delete('DictionaryDB')
-    console.log('База данных удалена.')
-  } catch (error) {
-    console.error('Ошибка при удалении базы данных:', error)
-  }
-}
-
 const db = new DictionaryDB()
 export default db
