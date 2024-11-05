@@ -11,6 +11,10 @@
             </v-btn>
           </h3>
         </div>
+        <div class="d-flex justify-space-between">
+          <TranslateGameModal :words="filterWords" />
+          <TranslateGameModal :words="filterWords" :toEnglish="true" />
+        </div>
         <WordsTable :words="filterWords" />
       </v-col>
     </v-row>
@@ -24,6 +28,7 @@ import WordSetModal from '@/components/WordSetModal.vue'
 import { useWordsStore } from '@/stores/store'
 import { storeToRefs } from 'pinia'
 import WordsTable from '@/components/WordsTable.vue'
+import TranslateGameModal from '@/components/TranslateGameModal.vue'
 
 const wordsStore = useWordsStore()
 const { words, wordsSets } = storeToRefs(wordsStore)
