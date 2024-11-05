@@ -11,9 +11,14 @@
             </v-btn>
           </h3>
         </div>
-        <div class="d-flex justify-space-between">
-          <TranslateGameModal :words="filterWords" />
-          <TranslateGameModal :words="filterWords" :toEnglish="true" />
+        <div class="games-wrapper">
+          <TranslateGameModal class="game-btn" :words="filterWords" />
+          <TranslateGameModal
+            class="game-btn"
+            :words="filterWords"
+            :toEnglish="true"
+          />
+          <FindPairsGameModal class="game-btn" :words="filterWords" />
         </div>
         <WordsTable :words="filterWords" />
       </v-col>
@@ -29,6 +34,7 @@ import { useWordsStore } from '@/stores/store'
 import { storeToRefs } from 'pinia'
 import WordsTable from '@/components/WordsTable.vue'
 import TranslateGameModal from '@/components/TranslateGameModal.vue'
+import FindPairsGameModal from '@/components/FindPairsGameModal.vue'
 
 const wordsStore = useWordsStore()
 const { words, wordsSets } = storeToRefs(wordsStore)
@@ -48,3 +54,20 @@ const filterWords = computed(() => {
   }
 })
 </script>
+
+<style scoped>
+.games-wrapper {
+  display: flex;
+}
+.game-btn {
+  margin-right: 1rem;
+}
+@media (max-width: 648px) {
+  .games-wrapper {
+    display: block;
+  }
+  .game-btn {
+    margin-bottom: 1rem;
+  }
+}
+</style>

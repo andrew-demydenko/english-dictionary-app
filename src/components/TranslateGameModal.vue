@@ -2,7 +2,7 @@
   <div>
     <v-dialog v-model="showModal" max-width="600px" persistent>
       <template #activator="{ props: activatorProps }">
-        <v-btn v-bind="activatorProps" color="primary">
+        <v-btn v-bind="activatorProps" :color="toEnglish ? 'green' : 'primary'">
           {{ toEnglish ? 'Learn in English' : 'Learn from English' }}
         </v-btn>
       </template>
@@ -14,7 +14,7 @@
         <v-card-text>
           <v-slide-x-transition mode="out-in">
             <div v-if="currentWord" :key="currentWord.id">
-              <p class="text-h4 mb-2">
+              <p class="text-h6 mb-2">
                 {{ toEnglish ? currentWord.translation : currentWord.word }}
               </p>
 
