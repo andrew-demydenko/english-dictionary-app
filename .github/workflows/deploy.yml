@@ -1,4 +1,4 @@
-name: Deploy english-vocabulary
+name: Deploy project on gh-pages
 
 on:
   push:
