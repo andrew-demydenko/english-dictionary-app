@@ -7,7 +7,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/english-dictionary-app/',
+  base: process.env.NODE_ENV === 'production' ? '/english-vocabulary/' : '/',
   plugins: [vue(), vueJsx(), vueDevTools()],
   resolve: {
     alias: {
