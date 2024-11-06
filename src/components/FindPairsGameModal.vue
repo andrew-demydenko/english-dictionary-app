@@ -76,7 +76,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { shuffleArray } from '@/utils'
-import { type TWord } from '@/services/dexie'
+import { type TWord } from '@/services/words'
 
 interface ICard {
   text: string

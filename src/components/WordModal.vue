@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import { onUpdated, ref, type PropType } from 'vue'
-import { type TWord } from '@/services/dexie'
+import { type TWord } from '@/services/words'
 import { useWordsStore } from '@/stores/store'
 import { getWordData } from '@/services/words'
 

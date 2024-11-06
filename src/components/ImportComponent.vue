@@ -8,7 +8,17 @@
         <v-list-item-title>Import words</v-list-item-title>
       </v-list-item>
       <v-list-item @click="exportDatabaseAsJson">
-        <v-list-item-title>Backup</v-list-item-title>
+        <v-list-item-title>Save backup file</v-list-item-title>
+      </v-list-item>
+      <v-list-item @click="() => {}">
+        <v-list-item-title
+          >Clear database
+          <Confirmation
+            @submit="resetDatabase"
+            title="Erase database"
+            text="Are you sure you want to erase the database?"
+          ></Confirmation
+        ></v-list-item-title>
       </v-list-item>
     </v-list>
   </v-menu>
@@ -66,12 +76,13 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import Confirmation from '@/components/ConfirmationModal.vue'
 import {
   exportDatabaseAsJson,
   importDatabaseFromJson,
-  type TWord,
+  eraseDatabase,
 } from '@/services/dexie'
-import { getWordData } from '@/services/words'
+import { type TWord, getWordData } from '@/services/words'
 import { storeToRefs } from 'pinia'
 import { useWordsStore } from '@/stores/store'
 const isMenuActive = ref(false)
@@ -107,7 +118,7 @@ const importWords = async () => {
     const newWords: TWord[] = []
 
     formLoading.value = true
-    for (const item of wordsArray) {
+    for (const [index, item] of wordsArray.entries()) {
       const newWord: TWord = {
         word: item.word,
         translation: item.translation,
@@ -116,8 +127,12 @@ const importWords = async () => {
       }
 
       const existingWord = words.value.find((w: TWord) => item.word === w.word)
-
       if (!existingWord) {
+        if ((index + 1) % 30 === 0) {
+          await new Promise(resolve => setTimeout(resolve, 5000))
+        }
+        await new Promise(resolve => setTimeout(resolve, 400))
+        //help to avoid limit of service requests
         const data = await getWordData(newWord.word)
         if (data) {
           newWord.transcription = data.phonetic
@@ -132,10 +147,12 @@ const importWords = async () => {
       await wordsStore.addWords(newWords)
     }
 
-    resetData()
-    showSuccessSnackbar()
+    showImportSnackbar('Words imported successfully', 'success')
   } catch (error) {
+    showImportSnackbar('Error while words importing', 'error')
     console.error('Error importing words:', error)
+  } finally {
+    resetData()
   }
 }
 
@@ -147,18 +164,34 @@ const importBackup = async () => {
     await wordsStore.loadWordsSets()
     await wordsStore.loadWords()
 
-    resetData()
-    showSuccessSnackbar()
+    showImportSnackbar('Words imported successfully', 'success')
   } catch (error) {
-    showImportPopup.value = false
+    showImportSnackbar('Error while words importing', 'error')
     console.error('Error importing backup:', error)
+  } finally {
+    resetData()
   }
 }
 
-const showSuccessSnackbar = () => {
+const resetDatabase = async () => {
+  try {
+    await eraseDatabase()
+    await wordsStore.loadWordsSets()
+    await wordsStore.loadWords()
+
+    showImportSnackbar('Database erased successfully', 'success')
+  } catch (error) {
+    showImportSnackbar('Error while erasing database', 'error')
+    console.error('Error erasing database:', error)
+  } finally {
+    isMenuActive.value = false
+  }
+}
+
+const showImportSnackbar = (message: string, type: string) => {
   showSnackbar({
-    message: 'Words imported successfully',
-    color: 'success',
+    message,
+    color: type,
     timeout: 3000,
     position: 'top right',
   })

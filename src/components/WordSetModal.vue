@@ -49,7 +49,8 @@
 <script setup lang="ts">
 import { ref, computed, defineEmits, watch, onUpdated } from 'vue'
 import { debounce } from 'lodash'
-import { type TWord, type TWordsSet } from '@/services/dexie'
+import { type TWord } from '@/services/words'
+import { type TWordsSet } from '@/services/wordsSets'
 import { useWordsStore } from '@/stores/store'
 import { storeToRefs } from 'pinia'
 

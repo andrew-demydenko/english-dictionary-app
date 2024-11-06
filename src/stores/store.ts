@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
-import type { TWord, TWordsSet } from '@/services/dexie'
+import type { TWord } from '@/services/words'
+import type { TWordsSet } from '@/services/wordsSets'
 import {
   getWordsSet,
   getWordsSets,

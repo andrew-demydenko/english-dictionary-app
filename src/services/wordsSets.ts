@@ -1,4 +1,11 @@
-import db, { type TWordsSet, type TWord } from './dexie'
+import db from './dexie'
+import { type TWord } from './words'
+
+export type TWordsSet = {
+  id?: string
+  name: string
+  wordIds: string[]
+}
 
 export const getWordsSets = async (): Promise<TWordsSet[]> => {
   return await db.wordsSets.toArray()

@@ -1,39 +1,7 @@
 import Dexie, { type Table } from 'dexie'
 import { saveAs } from 'file-saver'
-
-export type TWord = {
-  id?: string
-  word: string
-  transcription?: string
-  translation: string
-  wordData?: TWordData
-  sets?: string[]
-}
-
-export type TWordsSet = {
-  id?: string
-  name: string
-  wordIds: string[]
-}
-
-export type TWordData = {
-  word: string
-  phonetics: {
-    text: string
-    audio: string
-  }[]
-  phonetic: string
-  sourceUrls: string[]
-  meanings: {
-    synonyms: string[]
-    partOfSpeech: string
-    definitions: {
-      definition: string
-      example: string
-      synonyms: string[]
-    }[]
-  }[]
-} | null
+import { type TWordsSet } from './wordsSets'
+import { type TWord } from './words'
 
 class DictionaryDB extends Dexie {
   words!: Table<TWord, string>
@@ -62,6 +30,12 @@ export const exportDatabaseAsJson = async () => {
 
   const blob = new Blob([jsonString], { type: 'application/json' })
   saveAs(blob, 'database_backup.json')
+}
+
+export const eraseDatabase = async () => {
+  await db.transaction('rw', db.tables, async () => {
+    await Promise.all(db.tables.map(table => table.clear()))
+  })
 }
 
 export const importDatabaseFromJson = async (json: string) => {

@@ -39,7 +39,7 @@
 import PopupWordDetails from '@/components/PopupWordDetails.vue'
 import Confirmation from '@/components/ConfirmationModal.vue'
 import WordModal from './WordModal.vue'
-import type { TWord } from '@/services/dexie'
+import type { TWord } from '@/services/words'
 import { useWordsStore } from '@/stores/store'
 
 type ReadonlyHeaders = {

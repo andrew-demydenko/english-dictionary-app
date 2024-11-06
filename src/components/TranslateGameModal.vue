@@ -76,7 +76,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { type TWord } from '@/services/dexie'
+import { type TWord } from '@/services/words'
 
 const props = defineProps({
   words: {

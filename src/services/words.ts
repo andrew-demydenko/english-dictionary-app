@@ -1,5 +1,33 @@
-import db, { type TWord, type TWordData } from './dexie'
+import db from './dexie'
 import { deleteWordsSet } from './wordsSets'
+
+export type TWord = {
+  id?: string
+  word: string
+  transcription?: string
+  translation: string
+  wordData?: TWordData
+  sets?: string[]
+}
+
+export type TWordData = {
+  word: string
+  phonetics: {
+    text: string
+    audio: string
+  }[]
+  phonetic: string
+  sourceUrls: string[]
+  meanings: {
+    synonyms: string[]
+    partOfSpeech: string
+    definitions: {
+      definition: string
+      example: string
+      synonyms: string[]
+    }[]
+  }[]
+} | null
 
 export const getWords = async (): Promise<TWord[]> => {
   return await db.words.toArray()
