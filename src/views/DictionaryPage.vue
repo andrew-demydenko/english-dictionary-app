@@ -35,6 +35,7 @@ const dialog = ref(false)
 
 const showDialog = () => {
   dialog.value = true
+  console.log(dialog.value)
 }
 </script>
 
