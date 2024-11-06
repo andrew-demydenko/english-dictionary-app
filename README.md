@@ -6,6 +6,7 @@ A simple English dictionary application built with Vue 3, Pinia, and Vuetify. Th
 
 This project uses the following technologies:
 - Vue 3
+- indexDB (dexie)
 - Pinia for state management
 - Vuetify for UI components
 - Vite as the build tool
