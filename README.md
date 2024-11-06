@@ -1,6 +1,6 @@
 # English Dictionary
 
-A simple English dictionary application built with Vue 3, Pinia, and Vuetify. This project allows you to manage an English dictionary, offering features such as search, word management, and saving translations.
+A simple English dictionary application built with Vue 3, Pinia, and Vuetify. This project allows you to manage an English dictionary, offering features such as search, word management, learning exercises.
 
 ## Project Setup
 
