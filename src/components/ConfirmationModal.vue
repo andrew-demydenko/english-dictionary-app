@@ -3,15 +3,10 @@
     <template v-slot:default="{ isActive }">
       <v-card :text="text" :title="title">
         <template v-slot:actions>
-          <v-btn
-            color="grey-lighten-2"
-            variant="elevated"
-            @click="isActive.value = false"
+          <v-btn color="grey-darken-2" @click="isActive.value = false"
             >Cancel</v-btn
           >
-          <v-btn color="primary" variant="elevated" @click="onSubmit"
-            >Submit</v-btn
-          >
+          <v-btn color="error" @click="onSubmit">Submit</v-btn>
         </template>
       </v-card>
     </template>

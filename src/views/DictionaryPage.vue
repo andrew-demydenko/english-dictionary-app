@@ -1,7 +1,7 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col>
+  <v-container class="h-100">
+    <v-row class="h-100">
+      <v-col class="h-100 d-flex flex-column">
         <div class="controls">
           <div class="controls-creation">
             <v-btn class="controls-creation-btn" @click="showDialog"

@@ -1,7 +1,7 @@
 <template>
   <v-menu offset-y>
     <template v-slot:activator="{ props }">
-      <v-btn v-bind="props">
+      <v-btn :disabled="!wordsSets.length" v-bind="props">
         Words sets
         <v-icon class="ml-2">mdi-dots-vertical</v-icon>
       </v-btn>

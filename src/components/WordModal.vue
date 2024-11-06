@@ -11,7 +11,7 @@
         <v-text-field v-model="formInputs.translation" label="Translation" />
       </v-card-text>
       <v-card-actions>
-        <v-btn @click="closeDialog">Cancel</v-btn>
+        <v-btn color="grey-darken-2" @click="closeDialog">Cancel</v-btn>
         <v-btn color="primary" :loading="formLoading" @click="saveWord"
           >Save</v-btn
         >

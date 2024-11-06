@@ -3,8 +3,15 @@
 #app {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem 2rem 0;
   font-weight: normal;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#app > div {
+  min-height: 1px;
 }
 
 a {

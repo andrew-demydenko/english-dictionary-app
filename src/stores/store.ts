@@ -9,7 +9,13 @@ import {
   modifyWordsSet,
   deleteWordsSet,
 } from '@/services/wordsSets'
-import { getWords, createWord, modifyWord, deleteWord } from '@/services/words'
+import {
+  getWords,
+  createWord,
+  modifyWord,
+  deleteWord,
+  createWords,
+} from '@/services/words'
 
 export const useWordsStore = defineStore('words', () => {
   const words = ref<TWord[]>([])
@@ -42,6 +48,12 @@ export const useWordsStore = defineStore('words', () => {
     words.value.push(data)
   }
 
+  const addWords = async (newWords: TWord[]) => {
+    const data = newWords.map(w => ({ ...w, id: uuidv4() }))
+    await createWords(data)
+    words.value.push(...data)
+  }
+
   const updateWord = async (updatedWord: TWord) => {
     await modifyWord(updatedWord)
     const index = words.value.findIndex(word => word.id === updatedWord.id)
@@ -53,6 +65,17 @@ export const useWordsStore = defineStore('words', () => {
 
   const removeWord = async (wordId: string) => {
     await deleteWord(wordId)
+
+    wordsSets.value.forEach(set => {
+      if (set.wordIds.includes(wordId)) {
+        set.wordIds = set.wordIds.filter(id => id !== wordId)
+      }
+
+      if (set.wordIds.length === 0) {
+        removeWordsSet(set.id as string, set.name)
+      }
+    })
+
     words.value = words.value.filter(word => word.id !== wordId)
   }
 
@@ -89,6 +112,7 @@ export const useWordsStore = defineStore('words', () => {
 
     // word
     words,
+    addWords,
     findWordById,
     addWord,
     updateWord,

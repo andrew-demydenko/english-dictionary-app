@@ -1,5 +1,6 @@
 <template>
   <v-data-table
+    :sticky="true"
     class="words-table"
     :headers="headers"
     :items="words"
@@ -77,6 +78,11 @@ const handleRemoveWord = async (id: string) => {
 </script>
 
 <style scoped>
+.words-table {
+  flex: 1;
+  min-height: 1px;
+  padding-top: 1rem;
+}
 .words-table :deep(th) {
   font-weight: 600 !important;
 }

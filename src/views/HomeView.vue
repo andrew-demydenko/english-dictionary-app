@@ -41,7 +41,6 @@
           <p class="mb-4">
             Test your knowledge with quizzes and improve your memory retention.
           </p>
-          <p>In develop...</p>
         </v-card>
       </v-col>
     </v-row>

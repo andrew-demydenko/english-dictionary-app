@@ -63,11 +63,9 @@
         <div class="px-6 pt-2">
           <h4 v-if="gameOver">Completed in {{ timeElapsed }} seconds!</h4>
           <v-card-actions class="px-0">
-            <v-btn color="primary" variant="elevated" @click="restartGame"
-              >Restart Game</v-btn
-            >
+            <v-btn color="primary" @click="restartGame">Restart Game</v-btn>
             <v-spacer></v-spacer>
-            <v-btn color="grey" @click="closeGameModal">Close</v-btn>
+            <v-btn color="grey-darken-2" @click="closeGameModal">Close</v-btn>
           </v-card-actions>
         </div>
       </v-card>
@@ -199,7 +197,6 @@ const closeGameModal = () => {
 }
 
 .game-card {
-  height: 1fr;
   display: flex;
   align-items: center;
   justify-content: center;

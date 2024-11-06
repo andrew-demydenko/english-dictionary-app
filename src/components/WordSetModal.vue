@@ -4,17 +4,20 @@
       <v-card-title>
         <span class="headline">Create Word Set</span>
       </v-card-title>
-      <v-card-text>
+      <v-card-text class="pb-0">
         <v-text-field v-model="name" label="Name of set" />
       </v-card-text>
-      <v-card-text>
+
+      <v-card-text class="pb-0">
         <v-text-field
           v-model="searchImmediate"
           label="Search words"
           clearable
           @click:clear="searchImmediate = ''"
         />
-        <v-list>
+      </v-card-text>
+      <v-card-text class="pt-0 overflow-auto">
+        <v-list class="py-0">
           <v-list-item
             v-for="word in filteredWords"
             :key="word.id"
@@ -34,14 +37,8 @@
         </v-list>
       </v-card-text>
       <v-card-actions>
-        <v-btn color="grey-lighten-2" variant="elevated" @click="close"
-          >Cancel</v-btn
-        >
-        <v-btn
-          color="primary"
-          variant="elevated"
-          :disabled="!name"
-          @click="saveSet"
+        <v-btn color="grey-darken-2" @click="close">Cancel</v-btn>
+        <v-btn color="primary" :disabled="!name" @click="saveSet"
           >Save Set</v-btn
         >
       </v-card-actions>
