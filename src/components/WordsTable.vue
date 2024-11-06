@@ -36,7 +36,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
 import PopupWordDetails from '@/components/PopupWordDetails.vue'
 import Confirmation from '@/components/ConfirmationModal.vue'
 import WordModal from './WordModal.vue'

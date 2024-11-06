@@ -74,7 +74,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps } from 'vue'
+import { ref } from 'vue'
 import { shuffleArray } from '@/utils'
 import { type TWord } from '@/services/dexie'
 
