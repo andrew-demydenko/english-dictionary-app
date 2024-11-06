@@ -11,7 +11,7 @@
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
-    "prepare": "husky"
+    "prepare": "husky init"
   },
   "lint-staged": {
     "*.ts": [
