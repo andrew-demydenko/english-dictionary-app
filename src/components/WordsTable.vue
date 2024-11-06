@@ -1,6 +1,6 @@
 <template>
-  <v-data-table
-    :sticky="true"
+  <v-data-table-virtual
+    :fixed-header="true"
     class="words-table"
     :headers="headers"
     :items="words"
@@ -32,7 +32,7 @@
         </v-btn>
       </div>
     </template>
-  </v-data-table>
+  </v-data-table-virtual>
 </template>
 
 <script setup lang="ts">
