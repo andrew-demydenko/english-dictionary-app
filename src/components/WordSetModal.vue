@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, defineEmits, watch, onUpdated } from 'vue'
+import { ref, computed, watch, onUpdated } from 'vue'
 import { debounce } from 'lodash'
 import { type TWord } from '@/services/words'
 import { type TWordsSet } from '@/services/wordsSets'

@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { onUpdated, ref, type PropType } from 'vue'
+import { watch, ref, type PropType } from 'vue'
 import { type TWord } from '@/services/words'
 import { useWordsStore } from '@/stores/store'
 import { getWordData } from '@/services/words'
@@ -49,8 +49,8 @@ const closeDialog = () => {
   isVisible.value = false
 }
 
-onUpdated(() => {
-  if (props.wordData) {
+watch(isVisible, newValue => {
+  if (newValue && props.wordData) {
     formInputs.value = {
       word: props.wordData.word,
       translation: props.wordData.translation,
