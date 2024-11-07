@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header v-if="showHeader">
     <img
       alt="Vue logo"
       class="logo"
@@ -10,8 +10,12 @@
 
     <div class="wrapper">
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/dictionary">Dictionary</RouterLink>
+        <RouterLink to="/">
+          <v-btn variant="text" text="Home" />
+        </RouterLink>
+        <RouterLink to="/dictionary">
+          <v-btn variant="text" text="Dictionary" />
+        </RouterLink>
       </nav>
       <ImportComponent />
     </div>
@@ -22,13 +26,16 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
+import { onMounted, computed } from 'vue'
+import { RouterLink, RouterView, useRoute } from 'vue-router'
 import ImportComponent from '@/components/ImportComponent.vue'
 import GlobalSnackbar from './components/GlobalSnackbar.vue'
 import { useWordsStore } from '@/stores/store'
 const { loadWordsSets, loadWords } = useWordsStore()
+const route = useRoute()
+const showHeader = computed(() => route.name !== 'not-found')
 
+console.log(route.name)
 onMounted(() => {
   loadWordsSets()
   loadWords()

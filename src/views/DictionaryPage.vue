@@ -4,9 +4,7 @@
       <v-col class="h-100 d-flex flex-column">
         <div class="controls">
           <div class="controls-creation">
-            <v-btn class="controls-creation-btn" @click="showDialog"
-              >Add a word<WordModal
-            /></v-btn>
+            <v-btn class="controls-creation-btn">Add a word<WordModal /></v-btn>
             <v-btn class="controls-creation-btn"
               >Create Word Set<WordSetModal :words="words"
             /></v-btn>
@@ -21,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import WordSetModal from '@/components/WordSetModal.vue'
 import SetList from '@/components/SetList.vue'
 import { useWordsStore } from '@/stores/store'
@@ -31,12 +28,6 @@ import WordsTable from '@/components/WordsTable.vue'
 
 const wordsStore = useWordsStore()
 const { words } = storeToRefs(wordsStore)
-const dialog = ref(false)
-
-const showDialog = () => {
-  dialog.value = true
-  console.log(dialog.value)
-}
 </script>
 
 <style scoped>

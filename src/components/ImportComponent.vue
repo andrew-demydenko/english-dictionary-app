@@ -24,12 +24,16 @@
   </v-menu>
   <v-dialog :loading="formLoading" v-model="showImportPopup" max-width="600px">
     <v-card>
-      <div v-if="formLoading" class="loader-overlay">
-        <v-progress-circular
-          indeterminate
-          color="primary"
-          size="46"
-        ></v-progress-circular>
+      <div v-if="!!formLoading" class="loader-overlay">
+        <v-progress-linear
+          class="w-75 bg-grey"
+          v-model="formLoading"
+          color="blue-darken-2"
+          height="25"
+          ><strong class="text-white"
+            >{{ formLoading }}%</strong
+          ></v-progress-linear
+        >
       </div>
       <v-card-title class="headline">Import Words</v-card-title>
       <div class="px-6 pt-2">
@@ -64,7 +68,7 @@
         <v-spacer></v-spacer>
         <v-btn
           color="primary"
-          :disabled="formLoading || !importText"
+          :disabled="!!formLoading || !importText"
           @click="isBackup ? importBackup() : importWords()"
           >Import</v-btn
         >
@@ -88,7 +92,7 @@ import { useWordsStore } from '@/stores/store'
 const isMenuActive = ref(false)
 const showImportPopup = ref(false)
 const importText = ref('')
-const formLoading = ref(false)
+const formLoading = ref(0)
 const isBackup = ref(false)
 const wordsStore = useWordsStore()
 const { words } = storeToRefs(wordsStore)
@@ -117,7 +121,6 @@ const importWords = async () => {
     const wordsArray = JSON.parse(importText.value)
     const newWords: TWord[] = []
 
-    formLoading.value = true
     for (const [index, item] of wordsArray.entries()) {
       const newWord: TWord = {
         word: item.word,
@@ -125,7 +128,7 @@ const importWords = async () => {
         transcription: '',
         wordData: null,
       }
-
+      formLoading.value = Math.ceil(((index + 1) / wordsArray.length) * 100)
       const existingWord = words.value.find((w: TWord) => item.word === w.word)
       if (!existingWord) {
         if ((index + 1) % 30 === 0) {
@@ -158,7 +161,7 @@ const importWords = async () => {
 
 const importBackup = async () => {
   try {
-    formLoading.value = true
+    formLoading.value = 50
     await importDatabaseFromJson(importText.value)
 
     await wordsStore.loadWordsSets()
@@ -198,7 +201,7 @@ const showImportSnackbar = (message: string, type: string) => {
 }
 
 const resetData = async () => {
-  formLoading.value = false
+  formLoading.value = 0
   importText.value = ''
   showImportPopup.value = false
   isBackup.value = false

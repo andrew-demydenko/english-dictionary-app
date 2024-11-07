@@ -1,8 +1,9 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from '@/views/HomeView.vue'
+import PageNotFound from '@/views/PageNotFound.vue'
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
@@ -19,6 +20,7 @@ const router = createRouter({
       name: 'words-set',
       component: () => import('@/views/WordsSetPage.vue'),
     },
+    { path: '/:catchAll(.*)', name: 'not-found', component: PageNotFound },
   ],
 })
 
