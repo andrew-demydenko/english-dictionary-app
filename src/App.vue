@@ -35,7 +35,6 @@ const { loadWordsSets, loadWords } = useWordsStore()
 const route = useRoute()
 const showHeader = computed(() => route.name !== 'not-found')
 
-console.log(route.name)
 onMounted(() => {
   loadWordsSets()
   loadWords()
