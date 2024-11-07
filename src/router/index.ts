@@ -3,7 +3,7 @@ import HomeView from '@/views/HomeView.vue'
 import PageNotFound from '@/views/PageNotFound.vue'
 
 const router = createRouter({
-  history: createWebHistory('/english-dictionary-app/'),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',

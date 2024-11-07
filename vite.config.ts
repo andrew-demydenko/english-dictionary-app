@@ -8,8 +8,7 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base:
-    process.env.NODE_ENV === 'production' ? '/english-dictionary-app/' : '/',
+  base: process.env.NODE_ENV === 'production' ? process.env.BASE_URL : '/',
   plugins: [
     vue(),
     vueJsx(),
