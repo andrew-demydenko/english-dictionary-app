@@ -8,6 +8,10 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 // https://vite.dev/config/
 export default defineConfig({
+  build: {
+    outDir: 'dist',
+    chunkSizeWarningLimit: 1000,
+  },
   base: process.env.NODE_ENV === 'production' ? process.env.BASE_URL : '/',
   plugins: [
     vue(),

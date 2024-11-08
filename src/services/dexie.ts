@@ -43,7 +43,6 @@ export const importDatabaseFromJson = async (json: string) => {
 
   await db.transaction('rw', db.tables, async () => {
     await Promise.all(db.tables.map(table => table.clear()))
-    console.log('All data is erased!')
     for (const [tableName, records] of Object.entries(importData)) {
       const table = db.table(tableName)
 
@@ -54,8 +53,6 @@ export const importDatabaseFromJson = async (json: string) => {
       }
     }
   })
-
-  console.log('Data import is finished!')
 }
 
 const db = new DictionaryDB()
